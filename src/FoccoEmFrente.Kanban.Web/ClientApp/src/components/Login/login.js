@@ -1,26 +1,8 @@
 import React from "react";
-
-function Content(props){
-   return <div style={{width: props.width}}>{props.children}</div>
-}
-
-function Paragrafo({children}){
-   return <p>{children}</p>
-}
-
-function Botao(props){
-   const submitRender = props.submit ? "submit" : null;
-   return <button className={"btn btn-" + props.type} type={submitRender} onClick={props.onClick}>{props.text}</button>
-}
-
-function FormInput(props){
-   return (
-      <>
-         <label htmlFor={props.id}>{props.label}</label>
-         <input id={props.id} type={props.type} placeholder={props.placeholder}/>
-      </>
-   )
-}
+import Content from '../UI/Content'
+import Paragrafo from "../UI/Paragrafo";
+import Botao from "../UI/Botao";
+import FormInput from "../UI/FormInput";
 
 export default function Login({history}) {
 
