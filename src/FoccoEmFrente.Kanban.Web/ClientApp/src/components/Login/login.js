@@ -35,7 +35,7 @@ export default function Login({history}) {
             <FormInput id="email" type="email" placeholder="E-mail" label="E-mail"></FormInput>
             <FormInput id="senha" type="senha" placeholder="Senha" label="Senha"></FormInput>
             <Botao text="Entrar" type="primary" submit></Botao>
-            <Botao text="Registrar" type="secundary" submit onClick={onRegister}></Botao>
+            <Botao text="Registrar" type="secondary" submit onClick={onRegister}></Botao>
          </form>
       </Content>
    );
