@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import Popup from "../UI/Popup";
 
 export default function Register({history}) {
 
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
    const [confirmPassword, setconfirmPassword] = useState("");
+   const [showPopup, setShowPopup] = useState(false);
+   const [popupText, setPopupText] = useState("");
 
    const onRegister = async (event) => {
       event.preventDefault();
@@ -25,7 +28,8 @@ export default function Register({history}) {
       const responseContent = await response.json();
 
       if (!response.ok){
-         window.alert(responseContent);
+         setShowPopup(true);
+         setPopupText(responseContent);
          return;
       }
 
@@ -38,6 +42,7 @@ export default function Register({history}) {
    };
 
    return (
+      <>
       <div style={{width: "450px"}}>
          <p>Crie uma conta no <strong>Sunday.com</strong></p>
          <form onSubmit={onRegister}>
@@ -54,5 +59,7 @@ export default function Register({history}) {
             <button className="btn btn-secundary" type="submit" onClick={onVoltar}>Voltar</button>
          </form>
       </div>
+      <Popup trigger={showPopup} setTrigger={setShowPopup}>{popupText}</Popup>
+      </>
    );
 }

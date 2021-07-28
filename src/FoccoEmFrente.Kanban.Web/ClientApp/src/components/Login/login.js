@@ -3,10 +3,13 @@ import Content from '../UI/Content'
 import Paragrafo from "../UI/Paragrafo";
 import Botao from "../UI/Botao";
 import FormInput from "../UI/FormInput";
+import Popup from "../UI/Popup";
 
 export default function Login({history}) {
 
    const [formLogin, setFormLogin] = useState({email: "", password: ""});
+   const [showPopup, setShowPopup] = useState(false);
+   const [popupText, setPopupText] = useState("");
 
    const setEmail = (event) => {
       setFormLogin({...formLogin, email: event.target.value});
@@ -31,7 +34,8 @@ export default function Login({history}) {
       const responseContent = await response.json();
 
       if (!response.ok){
-         window.alert(responseContent);
+         setShowPopup(true);
+         setPopupText(responseContent);
          return;
       }
 
@@ -44,6 +48,7 @@ export default function Login({history}) {
    }
 
    return (
+      <>
       <Content width={450}>
          <Paragrafo>Bem vindo ao <strong>Sunday.com</strong>, o melhor sistema para gestão de tarefas.</Paragrafo>
          <form onSubmit={onLogin}>
@@ -53,5 +58,7 @@ export default function Login({history}) {
             <Botao text="Registrar" type="secondary" submit onClick={onRegister}></Botao>
          </form>
       </Content>
+      <Popup trigger={showPopup} setTrigger={setShowPopup}>{popupText}</Popup>
+      </>
    );
 }
