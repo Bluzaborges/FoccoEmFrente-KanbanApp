@@ -1,9 +1,55 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Content from '../UI/Content'
+import Paragrafo from "../UI/Paragrafo";
+import Botao from "../UI/Botao";
+import Pipe from "./Pipe";
+import './home.css';
 
-export default function Home() {
+export default function Home({history}) {
+   
+   const [activities, setActivities] = useState([]);
+   const token = localStorage.getItem("token");
+   if (!token) history.push("/login");
+
+   const loadActivities = async () => {
+      const response = await fetch("/api/activities", {
+         method: "GET",
+         headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`
+         }
+      });
+
+      const responseContent = await response.json();
+
+      if (!response.ok){
+         window.alert(["Não foi possível buscar as tarefas", responseContent]);
+         return;
+      }
+      setActivities(responseContent);
+   }
+
+   useEffect(() => {
+      loadActivities();
+   }, []);
+
+   const onExit = () => {
+      localStorage.removeItem("token");
+      history.push("/login");
+   }
+
    return (
-      <div>
-         <p>Home</p>
-      </div>
+      <Content width={800}>
+         <Paragrafo>Bem vindo ao <strong>Sunday.com</strong>.</Paragrafo>
+         <Paragrafo>Esse é seu canvas para organizar suas atividades. Crie novas atividades e mantenha elas sempre atualizadas.</Paragrafo>
+         <div className="canvas">
+            <Pipe activities={activities} status={0} />
+            <Pipe activities={activities} status={1} />
+            <Pipe activities={activities} status={2} />
+         </div>
+         <Botao text="Adicionar Atividade" type="primary" submit></Botao>
+         <Botao text="Sair" type="secondary" submit onClick={onExit}></Botao>
+      </Content>
    );
 }
