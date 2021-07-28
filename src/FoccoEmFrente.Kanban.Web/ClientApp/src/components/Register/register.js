@@ -59,7 +59,7 @@ export default function Register({history}) {
             <button className="btn btn-secundary" type="submit" onClick={onVoltar}>Voltar</button>
          </form>
       </div>
-      <Popup trigger={showPopup} setTrigger={setShowPopup}>{popupText}</Popup>
+      <Popup trigger={showPopup} setTrigger={setShowPopup} type="Registro">{popupText}</Popup>
       </>
    );
 }

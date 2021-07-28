@@ -35,7 +35,7 @@ export default function Login({history}) {
 
       if (!response.ok){
          setShowPopup(true);
-         setPopupText(responseContent);
+         setPopupText((typeof responseContent === 'object') ? responseContent[0] : responseContent);
          return;
       }
 
@@ -58,7 +58,7 @@ export default function Login({history}) {
             <Botao text="Registrar" type="secondary" submit onClick={onRegister}></Botao>
          </form>
       </Content>
-      <Popup trigger={showPopup} setTrigger={setShowPopup}>{popupText}</Popup>
+      <Popup trigger={showPopup} setTrigger={setShowPopup} type="Login">{popupText}</Popup>
       </>
    );
 }
