@@ -4,6 +4,7 @@ import Paragrafo from "../UI/Paragrafo";
 import Botao from "../UI/Botao";
 import Pipe from "./Pipe";
 import Popup from "../UI/Popup";
+import fetchFunction from "../../functions/fetchFunction";
 import './home.css';
 
 export default function Home({history}) {
@@ -16,14 +17,16 @@ export default function Home({history}) {
    if (!token) history.push("/login");
 
    const loadActivities = async () => {
-      const response = await fetch("/api/activities", {
+      /*const response = await fetch("/api/activities", {
          method: "GET",
          headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
             Authorization: `Bearer ${token}`
-         }
-      });
+         },
+      });*/
+
+      const response = await fetchFunction("/api/activities", "GET", token, undefined);
 
       const responseContent = await response.json();
 
@@ -32,17 +35,18 @@ export default function Home({history}) {
          setPopupText("Não foi possível buscar as tarefas.");
          return;
       }
+
       setActivities(responseContent);
    }
-
-   useEffect(() => {
-      loadActivities();
-   }, []);
 
    const onExit = () => {
       localStorage.removeItem("token");
       history.push("/login");
    }
+
+   useEffect(() => {
+      loadActivities();
+   }, []);
 
    return (
       <>
