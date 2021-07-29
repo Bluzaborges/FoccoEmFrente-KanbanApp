@@ -1,12 +1,13 @@
 import React, { useState } from "react";
+import Content from '../UI/Content'
+import Paragrafo from "../UI/Paragrafo";
+import Botao from "../UI/Botao";
+import FormInput from "../UI/FormInput";
 import Popup from "../UI/Popup";
 import fetchFunction from "../../functions/fetchFunction";
 
 export default function Register({history}) {
 
-   //const [email, setEmail] = useState("");
-   //const [password, setPassword] = useState("");
-   //const [confirmPassword, setconfirmPassword] = useState("");
    const [formRegister, setFormRegister] = useState({email: "", password: "", confirmPassword: ""});
    const [showPopup, setShowPopup] = useState(false);
    const [popupText, setPopupText] = useState("");
@@ -55,22 +56,16 @@ export default function Register({history}) {
 
    return (
       <>
-      <div style={{width: "450px"}}>
-         <p>Crie uma conta no <strong>Sunday.com</strong></p>
+      <Content width={450}>
+         <Paragrafo>Crie uma conta no <strong>Sunday.com</strong></Paragrafo>
          <form onSubmit={onRegister}>
-            <label htmlFor="email">E-mail</label>
-            <input id="email" type="email" placeholder="E-mail" value={formRegister.email} onChange={setEmail}/>
-
-            <label htmlFor="senha">Senha</label>
-            <input id="senha" type="password" placeholder="Senha" value={formRegister.password} onChange={setPassword}/>
-
-            <label htmlFor="confirm-password">Confirmar a Senha</label>
-            <input id="confirm-password" type="password" placeholder="Confirmar a Senha" value={formRegister.confirmPassword} onChange={setconfirmPassword}/>
-
-            <button className="btn btn-primary" type="submit">Registrar</button>
-            <button className="btn btn-secundary" type="submit" onClick={onVoltar}>Voltar</button>
+            <FormInput id="email" type="email" placeholder="E-mail" label="E-mail" value={formRegister.email} onChange={setEmail}></FormInput>
+            <FormInput id="senha" type="password" placeholder="Senha" label="Senha" value={formRegister.password} onChange={setPassword}></FormInput>
+            <FormInput id="confirm-password" type="password" placeholder="Confirmar a Senha" label="Confirmar a Senha" value={formRegister.confirmPassword} onChange={setconfirmPassword}></FormInput>
+            <Botao text="Registrar" type="primary" submit></Botao>
+            <Botao text="Voltar" type="secondary" submit onClick={onVoltar}></Botao>
          </form>
-      </div>
+      </Content>
       <Popup trigger={showPopup} setTrigger={setShowPopup} type="Registro">{popupText}</Popup>
       </>
    );
