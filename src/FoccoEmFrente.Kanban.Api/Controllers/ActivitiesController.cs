@@ -77,5 +77,26 @@ namespace FoccoEmFrente.Kanban.Api.Controllers
             return Ok(oldActivity);
         }
 
+        [HttpPut("{id}/todo")]
+        public async Task<IActionResult> AtualizarStatusParaTodo(Guid id)
+        {
+            var activity = await _activityServices.UpdateToTodoAsync(id, UserId);
+            return Ok(activity);
+        }
+
+        [HttpPut("{id}/doing")]
+        public async Task<IActionResult> AtualizarStatusParaDoing(Guid id)
+        {
+            var activity = await _activityServices.UpdateToDoingAsync(id, UserId);
+            return Ok(activity);
+        }
+
+        [HttpPut("{id}/done")]
+        public async Task<IActionResult> AtualizarStatusParaDone(Guid id)
+        {
+            var activity = await _activityServices.UpdateToDoneAsync(id, UserId);
+            return Ok(activity);
+        }
+
     }
 }

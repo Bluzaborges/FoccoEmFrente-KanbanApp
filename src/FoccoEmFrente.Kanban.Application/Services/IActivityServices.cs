@@ -15,5 +15,8 @@ namespace FoccoEmFrente.Kanban.Application.Services
         Task<Activity> UpdateAsync(Activity activity);
         Task<Activity> RemoveAsync(Activity activity);
         Task<Activity> RemoveAsync(Guid id, Guid userId);
+        Task<Activity> UpdateToTodoAsync(Guid id, Guid userId);
+        Task<Activity> UpdateToDoingAsync(Guid id, Guid userId);
+        Task<Activity> UpdateToDoneAsync(Guid id, Guid userId);
     }
 }

@@ -26,15 +26,6 @@ export default function Register({history}) {
 
    const onRegister = async (event) => {
       event.preventDefault();
-      
-      /*const response = await fetch("/api/account/register", {
-         method: "POST",
-         headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-         },
-         body: JSON.stringify(formRegister)
-      });*/
 
       const response = await fetchFunction("/api/account/register", "POST", undefined, formRegister);
 

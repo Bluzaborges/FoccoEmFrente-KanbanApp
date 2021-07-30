@@ -22,15 +22,6 @@ export default function Login({history}) {
 
    const onLogin = async (event) => {
       event.preventDefault();
-      
-      /*const response = await fetch("/api/account/login", {
-         method: "POST",
-         headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-         },
-         body: JSON.stringify(formLogin)
-      });*/
 
       const response = await fetchFunction("/api/account/login", "POST", undefined, formLogin);
 
